@@ -1,1 +1,59 @@
-<h1 style="color:red">TEST NEW VERSION</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ghost Team</title>
+
+<style>
+body {
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+
+.logs {
+  width: 80%;
+  margin: auto;
+  margin-top: 40px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+pre {
+  color: #0f0;
+}
+</style>
+</head>
+
+<body>
+
+<h1>👻 Ghost Team</h1>
+<p>Server Logs 🔥</p>
+
+<div class="logs">
+  <pre id="logs">Loading...</pre>
+</div>
+
+<script>
+const API = "https://hunters.up.railway.app/logs";
+
+function loadLogs() {
+  fetch(API)
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("logs").textContent = data;
+  });
+}
+
+// تحميل أول مرة
+loadLogs();
+
+// تحديث كل 3 ثواني (LIVE)
+setInterval(loadLogs, 3000);
+</script>
+
+</body>
+</html>
