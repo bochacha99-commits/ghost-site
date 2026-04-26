@@ -4,15 +4,6 @@
 <meta charset="UTF-8">
 <title>Ghost Team</title>
 
-<!-- GOOGLE ANALYTICS -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-4ZXMJNX68D');
-</script>
-
 <style>
 body {
   margin: 0;
@@ -31,7 +22,7 @@ body {
 }
 
 .container {
-  margin-top: 120px;
+  margin-top: 80px;
 }
 
 h1 {
@@ -39,26 +30,40 @@ h1 {
   text-shadow: 0 0 20px #fff;
 }
 
-p {
-  color: #aaa;
-  font-size: 20px;
-}
-
 .btn {
   display: inline-block;
-  margin-top: 30px;
-  padding: 15px 30px;
+  margin-top: 20px;
+  padding: 12px 25px;
   background: #5865F2;
+  border-radius: 12px;
   color: white;
   text-decoration: none;
-  border-radius: 15px;
-  font-size: 18px;
   transition: 0.3s;
 }
 
 .btn:hover {
-  background: #4752c4;
   transform: scale(1.1);
+}
+
+.logs-box {
+  margin: 50px auto;
+  width: 80%;
+  max-width: 700px;
+  background: #111;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  box-shadow: 0 0 15px #000;
+}
+
+.logs-box h2 {
+  text-align: center;
+}
+
+pre {
+  white-space: pre-wrap;
+  color: #0f0;
+  font-size: 14px;
 }
 </style>
 </head>
@@ -68,9 +73,31 @@ p {
 <div class="container">
   <h1>👻 Ghost Team</h1>
   <p>Best Moroccan Community 🔥</p>
-
   <a href="https://discord.gg/FrRSUKDG" class="btn">Join Discord</a>
 </div>
+
+<div class="logs-box">
+  <h2>📊 Live Server Logs</h2>
+  <pre id="logs">Loading...</pre>
+</div>
+
+<script>
+const API = "https://hunters.up.railway.app/logs";
+
+function loadLogs() {
+  fetch(API)
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("logs").textContent = data;
+    });
+}
+
+// 🔄 تحديث كل 3 ثواني (LIVE)
+setInterval(loadLogs, 3000);
+
+// أول تحميل
+loadLogs();
+</script>
 
 </body>
 </html>
