@@ -1,29 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Ghost Team</title>
 
 <style>
 body {
-  background: black;
+  margin: 0;
+  font-family: Arial;
+  background: #0a0a0a;
   color: white;
   text-align: center;
-  font-family: Arial;
 }
 
+/* TITLE */
+h1 {
+  margin-top: 60px;
+  font-size: 50px;
+  text-shadow: 0 0 20px #fff;
+}
+
+p {
+  color: #aaa;
+}
+
+/* LOG BOX */
 .logs {
   width: 80%;
-  margin: auto;
-  margin-top: 40px;
+  max-width: 800px;
+  margin: 40px auto;
   background: #111;
+  border-radius: 15px;
   padding: 20px;
-  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,255,0,0.2);
   text-align: left;
 }
 
+/* HEADER */
+.logs h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* LOG TEXT */
 pre {
-  color: #0f0;
+  color: #00ff88;
+  font-size: 14px;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+/* SCROLL */
+.logs {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* SCROLL STYLE */
+.logs::-webkit-scrollbar {
+  width: 6px;
+}
+.logs::-webkit-scrollbar-thumb {
+  background: #00ff88;
 }
 </style>
 </head>
@@ -31,9 +69,10 @@ pre {
 <body>
 
 <h1>👻 Ghost Team</h1>
-<p>Server Logs 🔥</p>
+<p>Live Server Logs 🔥</p>
 
 <div class="logs">
+  <h2>📊 Logs</h2>
   <pre id="logs">Loading...</pre>
 </div>
 
@@ -48,11 +87,11 @@ function loadLogs() {
   });
 }
 
-// تحميل أول مرة
+// أول تحميل
 loadLogs();
 
-// تحديث كل 3 ثواني (LIVE)
-setInterval(loadLogs, 3000);
+// تحديث كل 2 ثواني 🔄
+setInterval(loadLogs, 2000);
 </script>
 
 </body>
