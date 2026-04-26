@@ -77,22 +77,34 @@ pre {
 </div>
 
 <script>
+<script>
 const API = "https://hunters.up.railway.app/logs";
+
+function formatLogs(text) {
+  // نقسم logs
+  let lines = text.split("] ");
+
+  return lines.map(line => {
+    if (line.includes("JOIN")) {
+      return `<div style="color:#00ff88">🟢 ${line}]</div>`;
+    } else if (line.includes("LEAVE")) {
+      return `<div style="color:#ff4444">🔴 ${line}]</div>`;
+    } else {
+      return `<div>${line}]</div>`;
+    }
+  }).join("");
+}
 
 function loadLogs() {
   fetch(API)
   .then(res => res.text())
   .then(data => {
-    document.getElementById("logs").textContent = data;
+    document.getElementById("logs").innerHTML = formatLogs(data);
   });
 }
 
-// أول تحميل
 loadLogs();
-
-// تحديث كل 2 ثواني 🔄
 setInterval(loadLogs, 2000);
 </script>
-
 </body>
 </html>
