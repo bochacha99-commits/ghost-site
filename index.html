@@ -13,7 +13,6 @@ body {
   text-align: center;
 }
 
-/* TITLE */
 h1 {
   margin-top: 60px;
   font-size: 50px;
@@ -24,7 +23,6 @@ p {
   color: #aaa;
 }
 
-/* LOG BOX */
 .logs {
   width: 80%;
   max-width: 800px;
@@ -34,35 +32,32 @@ p {
   padding: 20px;
   box-shadow: 0 0 20px rgba(0,255,0,0.2);
   text-align: left;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-/* HEADER */
 .logs h2 {
   text-align: center;
   margin-bottom: 15px;
 }
 
-/* LOG TEXT */
-pre {
-  color: #00ff88;
-  font-size: 14px;
-  white-space: pre-wrap;
+.log {
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 8px;
   font-family: monospace;
 }
 
-/* SCROLL */
-.logs {
-  max-height: 400px;
-  overflow-y: auto;
+.join {
+  background: rgba(0,255,100,0.1);
+  color: #00ff88;
 }
 
-/* SCROLL STYLE */
-.logs::-webkit-scrollbar {
-  width: 6px;
+.leave {
+  background: rgba(255,0,0,0.1);
+  color: #ff4444;
 }
-.logs::-webkit-scrollbar-thumb {
-  background: #00ff88;
-}
+
 </style>
 </head>
 
@@ -73,24 +68,24 @@ pre {
 
 <div class="logs">
   <h2>📊 Logs</h2>
-  <pre id="logs">Loading...</pre>
+  <div id="logs">Loading...</div>
 </div>
 
-<script>
 <script>
 const API = "https://hunters.up.railway.app/logs";
 
 function formatLogs(text) {
-  // نقسم logs
   let lines = text.split("] ");
 
   return lines.map(line => {
+    if (!line.trim()) return "";
+
     if (line.includes("JOIN")) {
-      return `<div style="color:#00ff88">🟢 ${line}]</div>`;
+      return `<div class="log join">🟢 ${line}]</div>`;
     } else if (line.includes("LEAVE")) {
-      return `<div style="color:#ff4444">🔴 ${line}]</div>`;
+      return `<div class="log leave">🔴 ${line}]</div>`;
     } else {
-      return `<div>${line}]</div>`;
+      return `<div class="log">${line}]</div>`;
     }
   }).join("");
 }
@@ -106,5 +101,6 @@ function loadLogs() {
 loadLogs();
 setInterval(loadLogs, 2000);
 </script>
+
 </body>
 </html>
